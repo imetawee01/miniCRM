@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <system.webServer>
+    <defaultDocument enabled="true">
+      <files>
+        <clear />
+        <add value="index.html" />
+      </files>
+    </defaultDocument>
+
+    <!-- Use this file ONLY if the server does NOT have IIS URL Rewrite installed.
+         Rename to web.config and remove the rewrite section version. -->
+    <httpErrors errorMode="Custom" existingResponse="Replace">
+      <remove statusCode="404" subStatusCode="-1" />
+      <error statusCode="404" path="/index.html" responseMode="ExecuteURL" />
+    </httpErrors>
+
+    <staticContent>
+      <remove fileExtension=".json" />
+      <mimeMap fileExtension=".json" mimeType="application/json" />
+      <remove fileExtension=".woff" />
+      <mimeMap fileExtension=".woff" mimeType="font/woff" />
+      <remove fileExtension=".woff2" />
+      <mimeMap fileExtension=".woff2" mimeType="font/woff2" />
+      <remove fileExtension=".webmanifest" />
+      <mimeMap fileExtension=".webmanifest" mimeType="application/manifest+json" />
+    </staticContent>
+  </system.webServer>
+</configuration>

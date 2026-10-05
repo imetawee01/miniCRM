@@ -1,0 +1,13 @@
+{
+  "root": true,
+  "ignorePatterns": ["dist", ".angular", "node_modules"],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "parser": "@typescript-eslint/parser",
+      "plugins": ["@typescript-eslint"],
+      "extends": ["eslint:recommended"],
+      "env": { "browser": true, "es2022": true }
+    }
+  ]
+}

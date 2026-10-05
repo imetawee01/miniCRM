@@ -1,0 +1,174 @@
+@use '@angular/material' as mat;
+
+html {
+  @include mat.theme(
+    (
+      color: (
+        theme-type: light,
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette
+      ),
+      typography: Roboto,
+      density: 0
+    )
+  );
+}
+
+// Bend Material's generated tokens onto the thiqah palette. Kept in its own
+// block so the declarations don't follow mat.theme's nested rules.
+html {
+  --mat-sys-primary: var(--crm-blue-strong);
+  --mat-sys-on-primary: #ffffff;
+  --mat-sys-primary-container: var(--crm-blue-soft);
+  --mat-sys-on-primary-container: #123f56;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: Roboto, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  background: var(--crm-surface);
+  color: var(--crm-ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--crm-teal);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.crm-loading-bar {
+  position: fixed;
+  top: 0;
+  inset-inline-start: 0;
+  inset-inline-end: 0;
+  z-index: 2000;
+}
+
+.mat-mdc-snack-bar-container {
+  --mdc-snackbar-container-color: #192444;
+  --mdc-snackbar-supporting-text-color: #fff;
+}
+
+// ---------------------------------------------------------------------------
+// Scrollbars
+// ---------------------------------------------------------------------------
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #c9ced8 transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #c9ced8;
+  border-radius: var(--crm-radius-pill);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #aab2c0;
+  background-clip: content-box;
+}
+
+// ---------------------------------------------------------------------------
+// Buttons
+// ---------------------------------------------------------------------------
+.mat-mdc-button,
+.mat-mdc-unelevated-button,
+.mat-mdc-outlined-button,
+.mat-mdc-raised-button {
+  --mdc-text-button-label-text-tracking: 0.01em;
+  border-radius: var(--crm-radius-pill) !important;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.mat-mdc-unelevated-button:not(:disabled) {
+  box-shadow: 0 1px 2px rgba(25, 36, 68, 0.12);
+}
+
+.mat-mdc-icon-button {
+  --mdc-icon-button-state-layer-size: 40px;
+}
+
+// ---------------------------------------------------------------------------
+// Cards, menus and dialogs
+// ---------------------------------------------------------------------------
+.mat-mdc-card,
+.mat-mdc-menu-panel,
+.mat-mdc-dialog-surface {
+  border-radius: var(--crm-radius) !important;
+}
+
+.mat-mdc-menu-panel {
+  box-shadow: var(--crm-shadow-lg) !important;
+  border: 1px solid var(--crm-border);
+}
+
+// ---------------------------------------------------------------------------
+// Lists
+// ---------------------------------------------------------------------------
+.mat-mdc-list-item {
+  border-radius: var(--crm-radius-sm);
+}
+
+a.mat-mdc-list-item:hover {
+  background: var(--crm-blue-softer);
+}
+
+// ---------------------------------------------------------------------------
+// Tables
+// ---------------------------------------------------------------------------
+.mat-mdc-table {
+  .mat-mdc-header-row {
+    background: #fafbfc;
+  }
+
+  .mat-mdc-header-cell {
+    color: var(--crm-navy);
+    font-weight: 700;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .mat-mdc-row:hover {
+    background: var(--crm-blue-softer);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Tabs
+// ---------------------------------------------------------------------------
+.mat-mdc-tab-header {
+  --mat-tab-header-active-label-text-color: var(--crm-navy);
+  --mat-tab-header-active-focus-label-text-color: var(--crm-navy);
+  --mat-tab-header-active-hover-label-text-color: var(--crm-navy);
+  border-bottom: 1px solid var(--crm-border);
+}
+
+.mat-mdc-tab .mdc-tab__text-label {
+  font-weight: 600;
+}
+
+// ---------------------------------------------------------------------------
+// Form fields
+// ---------------------------------------------------------------------------
+.mat-mdc-form-field {
+  width: 100%;
+}

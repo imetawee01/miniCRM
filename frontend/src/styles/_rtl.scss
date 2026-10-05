@@ -1,0 +1,32 @@
+html[dir='rtl'] {
+  body {
+    font-family: 'Segoe UI', Tahoma, 'Noto Naskh Arabic', Arial, sans-serif;
+  }
+
+  .mat-mdc-form-field {
+    text-align: start;
+  }
+
+  // Arabic has no uppercase; tracking looks broken on connected letters
+  .group__label,
+  .crm-subsection-title,
+  .mat-mdc-header-cell,
+  th {
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .crm-sidenav {
+    box-shadow: -2px 0 12px rgba(15, 24, 48, 0.16);
+  }
+
+  // Progress bars fill from the inline-start edge
+  .crm-bar {
+    transform: scaleX(-1);
+  }
+
+  .mat-mdc-table .mat-mdc-header-cell,
+  .mat-mdc-table .mat-mdc-cell {
+    text-align: start;
+  }
+}

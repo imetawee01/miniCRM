@@ -1,0 +1,72 @@
+// Brand palette aligned with thiqah.sa
+// Primary blue: #3cb4e5, Navy: #192444, Green: #a1d683, Purple: #696d9e
+$navy: #192444;
+$navy-dark: #0f1830;
+$teal: #3cb4e5; // primary accent (thiqah blue)
+$teal-dark: #2595c3;
+$amber: #a1d683; // secondary accent (thiqah green)
+$amber-dark: #7cbf5a;
+$surface: #f6f5f6;
+$surface-card: #ffffff;
+$ink: #434345;
+$muted: #6f6f70;
+$danger: #c62828;
+$success: #2e7d32;
+$warning: #ed6c02;
+$border: #e3e2e4;
+$focus-ring: #3cb4e5;
+$purple: #696d9e;
+// Deeper shades of the brand blue/green, for text and fills that need
+// WCAG AA contrast against white (the brand tints are too light on their own).
+$blue-strong: #1b7fa8;
+$green-strong: #4e8a2f;
+
+:root {
+  --crm-navy: #{$navy};
+  --crm-navy-dark: #{$navy-dark};
+  --crm-teal: #{$teal};
+  --crm-teal-dark: #{$teal-dark};
+  --crm-blue-strong: #{$blue-strong};
+  --crm-amber: #{$amber};
+  --crm-amber-dark: #{$amber-dark};
+  --crm-green-strong: #{$green-strong};
+  --crm-purple: #{$purple};
+  --crm-surface: #{$surface};
+  --crm-surface-card: #{$surface-card};
+  --crm-ink: #{$ink};
+  --crm-muted: #{$muted};
+  --crm-danger: #{$danger};
+  --crm-success: #{$success};
+  --crm-warning: #{$warning};
+  --crm-border: #{$border};
+
+  // Tinted accents (used for icon chips, soft badges, hover states)
+  --crm-blue-soft: rgba(60, 180, 229, 0.12);
+  --crm-blue-softer: rgba(60, 180, 229, 0.06);
+  --crm-green-soft: rgba(161, 214, 131, 0.18);
+  --crm-purple-soft: rgba(105, 109, 158, 0.14);
+  --crm-danger-soft: rgba(198, 40, 40, 0.1);
+  --crm-navy-soft: rgba(25, 36, 68, 0.06);
+  --crm-on-navy-muted: rgba(255, 255, 255, 0.64);
+  --crm-on-navy-hover: rgba(255, 255, 255, 0.08);
+
+  // Radii
+  --crm-radius-sm: 10px;
+  --crm-radius: 14px;
+  --crm-radius-lg: 18px;
+  --crm-radius-pill: 999px;
+
+  // Elevation
+  --crm-shadow-sm: 0 1px 2px rgba(25, 36, 68, 0.06);
+  --crm-shadow: 0 2px 8px rgba(25, 36, 68, 0.07), 0 1px 2px rgba(25, 36, 68, 0.05);
+  --crm-shadow-lg: 0 12px 28px rgba(25, 36, 68, 0.12);
+
+  // Spacing scale
+  --crm-gap-xs: 0.375rem;
+  --crm-gap-sm: 0.625rem;
+  --crm-gap: 1rem;
+  --crm-gap-lg: 1.5rem;
+
+  --crm-sidenav-width: 264px;
+  --crm-topbar-height: 64px;
+}

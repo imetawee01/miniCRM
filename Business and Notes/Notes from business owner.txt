@@ -1,0 +1,21 @@
+
+Creating a New Opportunity
+Provide the ability to add a new customer directly if the customer is not available in the existing dropdown list.
+Allow the AM to upload/add opportunity-related attachments during the opportunity creation process.
+Add a dedicated field to capture a brief description of the opportunity scope.
+Opportunity Stage Visibility
+Provide a clear indication of the current stage/status of each opportunity.
+A visual journey or progress indicator would help users easily understand where the opportunity currently stands and what remains to be completed.
+System Navigation & User Experience
+Enhance the overall user experience and navigation, as it is currently not always clear what the next step in the opportunity journey should be.
+Consider providing clearer guidance or indicators to help users understand the required next action at each stage.
+Service Line Names
+Review and update the Service Line names.
+User Permissions
+Enhance the permissions and access controls, including permissions related to viewing information, to ensure users can only access the relevant data based on their roles.
+Reporting & Dashboards
+Provide reporting capabilities within the system to allow users and management to monitor opportunities, their stages, statuses, and other relevant KPIs.
+Consider providing dashboards and/or exportable reports for management and operational purposes.
+
+Appreciate your feedback on the above comments and when we can expect these enhancements to be reflected in the system.
+Best,

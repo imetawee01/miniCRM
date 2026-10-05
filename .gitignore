@@ -1,0 +1,53 @@
+## IDE
+.vs/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Build
+bin/
+obj/
+[Bb]uild/
+[Ll]og/
+artifacts/
+release/
+TestResults/
+coverage/
+
+## .NET
+project.lock.json
+*.nuget.props
+*.nuget.targets
+
+## Node / Angular
+node_modules/
+dist/
+.angular/
+frontend/.angular/
+frontend/dist/
+npm-debug.log*
+yarn-error.log*
+
+## Storage / logs
+**/storage/
+**/logs/
+*.log
+## Local scratch
+.tmp/
+docs/.pdf-tools/
+
+## Secrets
+appsettings.*.local.json
+*.pfx
+.env
+.env.local
+
+## OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+## Docker
+*.tar
