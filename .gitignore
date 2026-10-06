@@ -51,3 +51,6 @@ Desktop.ini
 
 ## Docker
 *.tar
+
+# Local publish output (may contain secrets)
+publish/

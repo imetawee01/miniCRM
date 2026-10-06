@@ -17,7 +17,11 @@ export const gateRoleGuard: CanActivateFn = (route) => {
   }
   return gates.get(id).pipe(
     map((gate) => {
-      const allowed = [...gate.assignedRoleCode.split('|'), gate.gate?.responsibleRoleCode].filter(Boolean) as string[];
+      const raw = [gate.assignedRoleCode, gate.gate?.responsibleRoleCode].filter(Boolean).join('|');
+      const allowed = raw
+        .split(/[|,]/)
+        .map((s) => s.trim())
+        .filter(Boolean);
       return store.hasRole(allowed) ? true : router.createUrlTree(['/403']);
     }),
     catchError(() => of(router.createUrlTree(['/403'])))

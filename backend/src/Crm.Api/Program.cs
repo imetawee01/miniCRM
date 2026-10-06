@@ -124,6 +124,10 @@ try
 
     var app = builder.Build();
 
+    var pathBase = builder.Configuration["PathBase"];
+    if (!string.IsNullOrWhiteSpace(pathBase))
+        app.UsePathBase(pathBase);
+
     app.UseMiddleware<ExceptionHandlingMiddleware>();
     app.UseMiddleware<RequestLoggingMiddleware>();
     app.UseSerilogRequestLogging();
@@ -134,6 +138,9 @@ try
         app.UseSwaggerUI();
     }
 
+    app.UseDefaultFiles();
+    app.UseStaticFiles();
+
     app.UseCors();
     app.UseAuthentication();
     app.UseAuthorization();
@@ -142,7 +149,7 @@ try
     app.MapControllers();
     app.MapHealthChecks("/health/live", new HealthCheckOptions { Predicate = _ => false });
     app.MapHealthChecks("/health/ready", new HealthCheckOptions { Predicate = c => c.Tags.Contains("ready") });
-    app.MapFallback(() => Results.Problem(statusCode: StatusCodes.Status404NotFound, title: "Not Found"));
+    app.MapFallbackToFile("index.html");
 
     if (!app.Environment.IsEnvironment("Testing"))
     {

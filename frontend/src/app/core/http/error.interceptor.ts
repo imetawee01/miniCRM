@@ -11,6 +11,21 @@ function isAuthRequest(url: string): boolean {
   return AUTH_ROUTES.some((path) => url.includes(path));
 }
 
+function requestPath(url: string): string {
+  return new URL(url, 'http://local').pathname;
+}
+
+/** Secondary widgets / follow-ups: fail soft instead of ejecting the whole page. */
+function isSecondaryForbiddenPath(path: string): boolean {
+  return (
+    /\/opportunities\/[^/]+\/builder$/.test(path) ||
+    /\/opportunities\/[^/]+\/audit$/.test(path) ||
+    /\/audit(\/|$)/.test(path) ||
+    // Admin user directory; mention pickers should use /users/pickable instead.
+    /\/users$/.test(path)
+  );
+}
+
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const toast = inject(ToastService);
   const router = inject(Router);
@@ -20,15 +35,13 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       if (err.status === 401) {
         return throwError(() => err);
       }
-      if (err.status === 403 && !authRequest) {
-        const path = new URL(req.url, 'http://local').pathname;
-        // Workflow follow-up calls (assign builder) must not eject the user from the page they just completed.
-        const stayOnPage = /\/opportunities\/[^/]+\/builder$/.test(path);
-        if (!stayOnPage) {
-          void router.navigate(['/403']);
-        }
+
+      const path = authRequest ? '' : requestPath(req.url);
+      if (err.status === 403 && !authRequest && !isSecondaryForbiddenPath(path)) {
+        void router.navigate(['/403']);
       }
-      if (!authRequest) {
+
+      if (!authRequest && !isSecondaryForbiddenPath(path)) {
         const problem = err.error as ProblemDetails | undefined;
         const detail =
           problem?.detail ||

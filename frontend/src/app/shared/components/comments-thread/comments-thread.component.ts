@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, input, OnInit, si
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CollaborationPath } from '../../../core/models/enums';
 import { Comment } from '../../../core/models/collaboration';
-import { UserListItem } from '../../../core/models/user';
+import { UserPickItem } from '../../../core/models/user';
 import { CommentsService } from '../../../core/services/comments.service';
 import { UsersService } from '../../../core/services/users.service';
 import { ToastService } from '../../../core/services/toast.service';
@@ -94,8 +94,8 @@ export class CommentsThreadComponent implements OnInit {
   readonly entityType = input.required<CollaborationPath>();
   readonly entityId = input.required<string>();
   readonly items = signal<Comment[]>([]);
-  readonly users = signal<UserListItem[]>([]);
-  readonly mentions = signal<UserListItem[]>([]);
+  readonly users = signal<UserPickItem[]>([]);
+  readonly mentions = signal<UserPickItem[]>([]);
   readonly replyTo = signal<string | null>(null);
   readonly mentionFilter = signal('');
   readonly body = new FormControl('', { nonNullable: true, validators: [Validators.required] });
@@ -116,8 +116,9 @@ export class CommentsThreadComponent implements OnInit {
 
   ngOnInit(): void {
     this.reload();
-    this.usersApi.list({ page: 1, pageSize: 200 }).subscribe({
-      next: (res) => this.users.set(res.items),
+    // Use pickable users (available to all authenticated roles). Admin /users list 403s for SL/AM.
+    this.usersApi.pickable().subscribe({
+      next: (res) => this.users.set(res),
       error: () => this.users.set([])
     });
   }
@@ -126,7 +127,7 @@ export class CommentsThreadComponent implements OnInit {
     return formatUtcTooltip(value);
   }
 
-  addMention(user: UserListItem): void {
+  addMention(user: UserPickItem): void {
     if (!this.mentions().some((u) => u.id === user.id)) {
       this.mentions.update((list) => [...list, user]);
     }

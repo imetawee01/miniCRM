@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, input, OnInit, signal } from '@angular/core';
+import { catchError, of } from 'rxjs';
 import { AuditLogEntry } from '../../../core/models/collaboration';
 import { AuditService } from '../../../core/services/audit.service';
 import { MATERIAL_IMPORTS } from '../../material';
@@ -62,10 +63,23 @@ export class ActivityLogComponent implements OnInit {
     const opportunityId = this.opportunityId();
     const entityId = this.entityId();
     const entityType = this.entityType();
-    if (opportunityId && !entityType) {
+
+    // Prefer opportunity-scoped audit (available to all authenticated roles that can open the opp).
+    // Global /audit requires CanViewAudit and used to 403-eject SL/Presales from approval pages.
+    if (opportunityId) {
       this.api
         .forOpportunity(opportunityId, { page: 1, pageSize: 100, sortBy: 'occurredAtUtc', sortDir: 'desc' })
-        .subscribe((res) => this.items.set(res));
+        .pipe(catchError(() => of([] as AuditLogEntry[])))
+        .subscribe((res) => {
+          let items = res;
+          if (entityType) {
+            items = items.filter((e) => e.entityType === entityType);
+          }
+          if (entityId) {
+            items = items.filter((e) => e.entityId === entityId);
+          }
+          this.items.set(items);
+        });
       return;
     }
 
@@ -79,6 +93,7 @@ export class ActivityLogComponent implements OnInit {
         entityId: entityId || undefined,
         opportunityId: opportunityId || undefined
       })
+      .pipe(catchError(() => of([] as AuditLogEntry[])))
       .subscribe((res) => this.items.set(this.extractItems(res)));
   }
 
